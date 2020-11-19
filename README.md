@@ -86,20 +86,20 @@ Los _opcodes_ y códigos de función de las instrucciones pueden encontrarse por
 
 1. `ori $v0, $zero, 4` reemplaza a `li $v0, 4` que es una pseudoinstrucción. En las instrucciones de tipo I el registro de destino es `rt` en vez de `rd`. Los campos que no se usan dicen "NA" por "no aplica".
 
-2. lui $4, 4097 [hello] reemplaza a la pseudoinstrucción la $a0, hello. Cargamos como constante la dirección de hello (0x1001 en hex y 1001 en dec) como el immediate.
+2. `lui $4, 4097 [hello]` reemplaza a la pseudoinstrucción la `$a0`, `hello`. Cargamos como constante la dirección de hello (0x1001 en hex y 1001 en dec) como el `immediate`.
 
-3. syscall es una instrucción de formato R (por lo tanto, su opcode es 0) pero no utiliza registros explícitamente, sí la ensamblan a la dirección 0x0000000c.
+3. `syscall` es una instrucción de formato R (por lo tanto, su `opcode` es 0) pero no utiliza registros explícitamente, sí la ensamblan a la dirección `0x0000000c`.
 
-4. lui $1, 4097 [numbers] guarda en el registro $at la posición de hello en la memoria. Luego, ori $8, $1, 16 [numbers] hace que nos paremos en la dirección que contiene numbers y guarda en $t0. Son instrucciones de tipo I ya que utilizan constantes para ubicar las etiquetas en la memoria.
+4. `lui $1, 4097 [numbers]` guarda en el registro `$at` la posición de `hello` en la memoria. Luego, `ori $8, $1, 16 [numbers]` hace que nos paremos en la dirección que contiene `numbers` y guarda en `$t0`. Son instrucciones de tipo I ya que utilizan constantes para ubicar las etiquetas en la memoria.
 
-5. lw $13, 0($8) y lw $14, 4($8) guardan en los registros $t5 y $t6,cumplen la funcion de RT, respectivamente la primera palabra de memoria en $t0 y la segunda palabra de memoria en $t0 (cumplen la funcion de RS), mientras que los offset son las constantes.
+5. `lw $13, 0($8) y lw $14, 4($8)` guardan en los registros `$t5` y `$t6`,cumplen la funcion de `RT`, respectivamente la primera palabra de memoria en `$t0` y la segunda palabra de memoria en `$t0` (cumplen la funcion de `RS`), mientras que los `offset` son las constantes.
 
-6. add $18, $13, $14 es una instrucción de tipo R porque suma los contenidos de los registros $t5 y $t6 (RS y RT respectivamente )y lo guardan en $s2 (RD).
+6. `add $18, $13, $14` es una instrucción de tipo R porque suma los contenidos de los registros `$t5 y $t6` (`RS y RT` respectivamente )y lo guardan en `$s2 (RD)`.
 
-7. addi $18, $18, 5 es una instrucción de tipo I porque le suma la constante 5 a lo que hay en el registro $s2 (cumple la funcion de RS y RT a la vez) y guarda el resultado en el mismo.
+7. `addi $18, $18, 5` es una instrucción de tipo I porque le suma la constante 5 a lo que hay en el registro `$s2` ,cumple la funcion de `RS y RT` a la vez, y guarda el resultado en el mismo.
 
-8. addu $4, $0, $18 es una instrucción de tipo R ya que utiliza registros y no constantes. En este caso, guarda en $a0 (RD) la suma de $zero y $s2 (RS y RT).
+8. `addu $4, $0, $18` es una instrucción de tipo R ya que utiliza registros y no constantes. En este caso, guarda en `$a0 (RD)` la suma de `$zero y $s2 (RS y RT)`.
 
-9. ori $2, $0, 1 es una instruccion de tipo I, cuya pseudo-instrucción se denomina li, que en este caso carga en $v0 (RT) un 1 (producto del or inmediato entre el 0 y el 1).
+9. `ori $2, $0, 1` es una instruccion de tipo I, cuya pseudo-instrucción se denomina li, que en este caso carga en `$v0 (RT)` un 1 (producto del or inmediato entre el 0 y el 1).
 
-10. Como el caso anterior: ori $2, $0, 10 cumple la misma función solo que carga un 10 al registro $v0 (RS). En esos casos, los operandos son zero (RS) y 1 (constante)
+10. Como el caso anterior: `ori $2, $0, 10` cumple la misma función solo que carga un 10 al registro `$v0 (RS)`. En esos casos, los operandos son `zero (RS)` y 1 (constante)
